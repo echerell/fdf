@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 17:58:52 by echerell          #+#    #+#             */
-/*   Updated: 2022/01/18 19:51:15 by echerell         ###   ########.fr       */
+/*   Created: 2021/05/05 22:59:54 by echerell          #+#    #+#             */
+/*   Updated: 2021/05/06 00:13:13 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-int		main(int argc, char **argv)
+int	ft_lstsize(t_list *lst)
 {
-	int	fd;
+	int	n;
 
-	if (argc != 2)
-		ft_putstr_fd("Format: ./fdf map\n", STDOUT_FILENO);
-	else
+	if (!lst)
+		return (0);
+	n = 0;
+	while (lst)
 	{
-		fd = open((const char*)argv[1], O_RDONLY);
-		if (fd == -1)
-			perror("Error");
-		else
-			run_prog(fd);
+		lst = lst->next;
+		n++;
 	}
-	return (0);
+	return (n);
 }

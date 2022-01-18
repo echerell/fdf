@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 17:58:52 by echerell          #+#    #+#             */
-/*   Updated: 2022/01/18 19:51:15 by echerell         ###   ########.fr       */
+/*   Created: 2021/05/05 22:37:43 by echerell          #+#    #+#             */
+/*   Updated: 2021/05/06 20:48:48 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-int		main(int argc, char **argv)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	int	fd;
-
-	if (argc != 2)
-		ft_putstr_fd("Format: ./fdf map\n", STDOUT_FILENO);
-	else
+	if (lst && new)
 	{
-		fd = open((const char*)argv[1], O_RDONLY);
-		if (fd == -1)
-			perror("Error");
-		else
-			run_prog(fd);
+		if (*lst)
+			new->next = *lst;
+		*lst = new;
 	}
-	return (0);
 }

@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 17:58:52 by echerell          #+#    #+#             */
-/*   Updated: 2022/01/18 19:51:15 by echerell         ###   ########.fr       */
+/*   Created: 2021/05/05 16:24:23 by echerell          #+#    #+#             */
+/*   Updated: 2021/05/05 16:39:34 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-int		main(int argc, char **argv)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int	fd;
+	char	*map;
+	size_t	i;
 
-	if (argc != 2)
-		ft_putstr_fd("Format: ./fdf map\n", STDOUT_FILENO);
-	else
+	if (!s || !f)
+		return (NULL);
+	i = 0;
+	map = ft_strdup(s);
+	if (!map)
+		return (NULL);
+	while (map[i])
 	{
-		fd = open((const char*)argv[1], O_RDONLY);
-		if (fd == -1)
-			perror("Error");
-		else
-			run_prog(fd);
+		map[i] = f(i, map[i]);
+		i++;
 	}
-	return (0);
+	return (map);
 }

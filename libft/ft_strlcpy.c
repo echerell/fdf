@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 17:58:52 by echerell          #+#    #+#             */
-/*   Updated: 2022/01/18 19:51:15 by echerell         ###   ########.fr       */
+/*   Created: 2021/04/30 23:46:27 by echerell          #+#    #+#             */
+/*   Updated: 2021/05/01 00:36:28 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include <stdlib.h>
 
-int		main(int argc, char **argv)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	int	fd;
+	size_t	i;
 
-	if (argc != 2)
-		ft_putstr_fd("Format: ./fdf map\n", STDOUT_FILENO);
-	else
+	i = 0;
+	if (!dst || !src)
+		return (0);
+	if (size > 0)
 	{
-		fd = open((const char*)argv[1], O_RDONLY);
-		if (fd == -1)
-			perror("Error");
-		else
-			run_prog(fd);
+		while (i < size - 1 && src[i])
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
 	}
-	return (0);
+	while (src[i])
+		i++;
+	return (i);
 }

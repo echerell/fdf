@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 17:58:52 by echerell          #+#    #+#             */
-/*   Updated: 2022/01/18 19:51:15 by echerell         ###   ########.fr       */
+/*   Created: 2021/05/05 22:19:45 by echerell          #+#    #+#             */
+/*   Updated: 2021/05/05 22:30:17 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-int		main(int argc, char **argv)
+t_list	*ft_lstnew(void *content)
 {
-	int	fd;
+	t_list	*new;
 
-	if (argc != 2)
-		ft_putstr_fd("Format: ./fdf map\n", STDOUT_FILENO);
-	else
-	{
-		fd = open((const char*)argv[1], O_RDONLY);
-		if (fd == -1)
-			perror("Error");
-		else
-			run_prog(fd);
-	}
-	return (0);
+	new = (t_list *)malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }

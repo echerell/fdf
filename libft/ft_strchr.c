@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 17:58:52 by echerell          #+#    #+#             */
-/*   Updated: 2022/01/18 19:51:15 by echerell         ###   ########.fr       */
+/*   Created: 2021/04/30 21:59:01 by echerell          #+#    #+#             */
+/*   Updated: 2021/04/30 22:07:23 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include <stdlib.h>
 
-int		main(int argc, char **argv)
+char	*ft_strchr(const char *s, int c)
 {
-	int	fd;
+	size_t	i;
 
-	if (argc != 2)
-		ft_putstr_fd("Format: ./fdf map\n", STDOUT_FILENO);
-	else
+	i = 0;
+	while (s[i])
 	{
-		fd = open((const char*)argv[1], O_RDONLY);
-		if (fd == -1)
-			perror("Error");
-		else
-			run_prog(fd);
+		if (s[i] == c)
+			return ((char *)(s + i));
+		i++;
 	}
-	return (0);
+	if (c == '\0')
+		return ((char *)(s + i));
+	return (NULL);
 }

@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 17:58:52 by echerell          #+#    #+#             */
-/*   Updated: 2022/01/18 19:51:15 by echerell         ###   ########.fr       */
+/*   Created: 2021/05/05 17:02:05 by echerell          #+#    #+#             */
+/*   Updated: 2021/05/06 20:55:43 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-int		main(int argc, char **argv)
+void	ft_putnbr_fd(int n, int fd)
 {
-	int	fd;
+	unsigned int	rec;
 
-	if (argc != 2)
-		ft_putstr_fd("Format: ./fdf map\n", STDOUT_FILENO);
-	else
+	if (n < 0)
 	{
-		fd = open((const char*)argv[1], O_RDONLY);
-		if (fd == -1)
-			perror("Error");
-		else
-			run_prog(fd);
+		ft_putchar_fd('-', fd);
+		rec = (unsigned int)(-1 * n);
 	}
-	return (0);
+	else
+		rec = (unsigned int)n;
+	if (rec >= 10)
+	{
+		ft_putnbr_fd(rec / 10, fd);
+		ft_putchar_fd(rec % 10 + '0', fd);
+	}
+	else
+		ft_putchar_fd(rec % 10 + '0', fd);
 }

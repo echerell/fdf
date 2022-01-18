@@ -9,30 +9,39 @@ USR_INCLUDE = -I/usr/include
 USRLIB_FLAGS = -L/usr/lib -lXext -lX11 -lm
 
 SRCS_DIR = ./srcs/
-SRCS_FILES = main.c
+SRCS_FILES = main.c fdf.c free.c map_check.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 
 OBJ_DIR = ./obj/
 OBJ_FILES = $(SRCS_FILES:.c=.o)
 OBJS = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
-#INCLUDES = -I./includes
+FDF_INCLUDE = -I./include
+FDF_INCLUDE_FILE = ./include/fdf.h
 
-
+LIBFT_DIR = ./libft/
+LIBFT_INCLUDE = -I./libft/include
+LIBFT_FLAGS = -Llibft -lft
+LIBFT = ./libft/libft.a
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) $(MLX_FLAGS) $(MLX_INCLUDE) $(USRLIB_FLAGS) -o $(NAME)
+$(NAME): $(LIBFT) $(OBJS)
+	$(CC) $(OBJS) $(MLX_FLAGS) $(USRLIB_FLAGS) $(LIBFT_FLAGS) -o $(NAME)
 
-$(OBJ_DIR)%.o:$(SRCS_DIR)%.c
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
+
+$(OBJ_DIR)%.o:$(SRCS_DIR)%.c $(FDF_INCLUDE_FILE)
 	mkdir -p $(OBJ_DIR)
-	$(CC) $(USR_INCLUDE) $(MLX_INCLUDE) -O3 -c $< -o $@
+	$(CC) $(CFLAGS) $(USR_INCLUDE) $(MLX_INCLUDE) $(FDF_INCLUDE) $(LIBFT_INCLUDE) -O3 -c $< -o $@
 
 clean:
+	$(MAKE) -C $(LIBFT_DIR) clean
 	rm -rf $(OBJS) $(OBJ_DIR)
 
 fclean: clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
 	rm -f $(NAME)
 
 re: fclean all
