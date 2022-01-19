@@ -9,7 +9,7 @@ USR_INCLUDE = -I/usr/include
 USRLIB_FLAGS = -L/usr/lib -lXext -lX11 -lm
 
 SRCS_DIR = ./srcs/
-SRCS_FILES = main.c fdf.c free.c map_check.c
+SRCS_FILES = main.c fdf.c free.c map_check.c utils.c color.c gradient.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 
 OBJ_DIR = ./obj/

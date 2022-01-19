@@ -6,17 +6,17 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:18:02 by echerell          #+#    #+#             */
-/*   Updated: 2022/01/18 23:49:33 by echerell         ###   ########.fr       */
+/*   Updated: 2022/01/19 18:24:31 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	split_line(char **line, char **data)
+static int	split_line(char **line, char ***data)
 {
-	if (!(data = ft_split(*line, ' ')))
+	if (!(*data = ft_split(*line, ' ')))
 		return (0);
-	if (!(data[0]))
+	if (!((*data)[0]))
 		return (0);
 	return (1);
 }
@@ -66,7 +66,46 @@ static int	add_matrix(t_world *world, char **data)
 	world->mat = matrix;
 	return (1);
 }
+/*
+static void	print_data(t_world *world)
+{
+	int i;
 
+	i = 0;
+	if (world->mat)
+	{
+		ft_putstr_fd("X matrix: \n", STDOUT_FILENO);
+		while (i < world->total)
+		{
+			ft_putnbr_fd(world->mat[i].x, STDOUT_FILENO);
+			ft_putchar_fd(' ', STDOUT_FILENO);
+			if (i > 0 && (i + 1) % world->cols == 0)
+				ft_putchar_fd('\n', STDOUT_FILENO);
+			i++;
+		}
+		i = 0;
+		ft_putstr_fd("Y matrix: \n", STDOUT_FILENO);
+		while (i < world->total)
+		{
+			ft_putnbr_fd(world->mat[i].y, STDOUT_FILENO);
+			ft_putchar_fd(' ', STDOUT_FILENO);
+			if (i > 0 && (i + 1) % world->cols == 0)
+				ft_putchar_fd('\n', STDOUT_FILENO);
+			i++;
+		}
+		i = 0;
+		ft_putstr_fd("Z matrix: \n", STDOUT_FILENO);
+		while (i < world->total)
+		{
+			ft_putnbr_fd(world->mat[i].z, STDOUT_FILENO);
+			ft_putchar_fd(' ', STDOUT_FILENO);
+			if (i > 0 && (i + 1) % world->cols == 0)
+				ft_putchar_fd('\n', STDOUT_FILENO);
+			i++;
+		}
+	}
+}
+*/
 int	check_map(int fd, t_world *world)
 {
 	char	*line;
@@ -78,19 +117,22 @@ int	check_map(int fd, t_world *world)
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		world->lines++;
-		if (!split_line(&line, data))
-			return (error_occur(&line, data));
+		if (!split_line(&line, &data))
+			return (error_occur(&line, &data));
 		if (!check_cols(world, data))
-			return (error_occur(&line, data));
+			return (error_occur(&line, &data));
 		world->total += world->cols;
 		if (!add_matrix(world, data))
-			return (error_occur(&line, data));
-		free_tmp(&line, data);
+			return (error_occur(&line, &data));
+		free_tmp(&line, &data);
 	}
-	if (ret == -1)
+	if (ret < 1)
 	{
-		free_tmp(&line, data);
-		perror("Error");
+		free_tmp(&line, &data);
+		if (world->lines == 0)
+			ft_putstr_fd("Wrong data or no data in the file\n", STDOUT_FILENO);
+		if (ret == -1)
+			perror("Error");
 	}
 	return (ret);
 }
