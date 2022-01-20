@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 19:51:30 by echerell          #+#    #+#             */
-/*   Updated: 2022/01/20 22:14:33 by echerell         ###   ########.fr       */
+/*   Updated: 2022/01/20 23:08:02 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	run_prog(int fd)
 	{
 		world.mlx.mlx_ptr = mlx_init();
 		world.mlx.win_ptr = mlx_new_window(world.mlx.mlx_ptr, WIN_WIDTH,
-			WIN_HEIGHT, "fdf");
+				WIN_HEIGHT, "fdf");
 		get_maxmin_alt(&world);
 		add_color(&world);
 		apply_changes(&world, 1);

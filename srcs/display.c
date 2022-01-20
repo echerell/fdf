@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 23:32:30 by echerell          #+#    #+#             */
-/*   Updated: 2022/01/20 22:51:05 by echerell         ###   ########.fr       */
+/*   Updated: 2022/01/20 23:13:25 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,13 @@ void	display_world(t_world *world)
 	if (!world->mlx.img_ptr)
 	{
 		world->mlx.img_ptr = mlx_new_image(world->mlx.mlx_ptr, WIN_WIDTH,
-			WIN_HEIGHT);
+				WIN_HEIGHT);
 		world->mlx.img_addr = mlx_get_data_addr(world->mlx.img_ptr,
-			&(world->mlx.bpp), &(world->mlx.line_len), &(world->mlx.endian));
+				&(world->mlx.bpp), &(world->mlx.line_len),
+				&(world->mlx.endian));
 	}
 	draw_world(world);
 	show_legend(world);
-	mlx_hook(world->mlx.win_ptr, 2, 1L<<0, &key_event, world);
+	mlx_hook(world->mlx.win_ptr, 2, 1L << 0, &key_event, world);
 	mlx_loop(world->mlx.mlx_ptr);
 }

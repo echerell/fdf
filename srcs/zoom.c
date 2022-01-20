@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 02:10:46 by echerell          #+#    #+#             */
-/*   Updated: 2022/01/20 22:34:39 by echerell         ###   ########.fr       */
+/*   Updated: 2022/01/20 23:08:40 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,12 @@ void	init_zoom(t_world *world)
 		{
 			while (incr < 0.98
 				&& ((dx / world->zoom) * (world->zoom + incr) > WIN_WIDTH
-				|| (dy / world->zoom) * (world->zoom + incr) > WIN_HEIGHT))
-				incr -= 0.02;
+					|| (dy / world->zoom) * (world->zoom + incr) > WIN_HEIGHT))
+						incr -= 0.02;
 		}
 			world->zoom += incr;
 	}
 }
-
 
 void	change_zoom(t_world *world, int keycode)
 {

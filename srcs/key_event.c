@@ -6,17 +6,14 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:26:49 by echerell          #+#    #+#             */
-/*   Updated: 2022/01/20 22:28:05 by echerell         ###   ########.fr       */
+/*   Updated: 2022/01/20 23:12:22 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	key_event(int keycode, void *param)
+static void	key_event1(t_world *world, int keycode)
 {
-	t_world *world;
-
-	world = (t_world*)param;
 	if (keycode == KEY_ESC)
 	{
 		free_world(world);
@@ -30,7 +27,15 @@ int	key_event(int keycode, void *param)
 			world->color_num++;
 		add_color(world);
 	}
-	else if (keycode == KEY_Q || keycode == KEY_A)
+}
+
+int	key_event(int keycode, void *param)
+{
+	t_world	*world;
+
+	world = (t_world *)param;
+	key_event1(world, keycode);
+	if (keycode == KEY_Q || keycode == KEY_A)
 		change_alt(world, keycode);
 	else if (keycode == KEY_ARR_UP || keycode == KEY_ARR_DOWN
 		|| keycode == KEY_ARR_LEFT || keycode == KEY_ARR_RIGHT)

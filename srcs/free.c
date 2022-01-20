@@ -6,13 +6,13 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:08:47 by echerell          #+#    #+#             */
-/*   Updated: 2022/01/19 23:50:58 by echerell         ###   ########.fr       */
+/*   Updated: 2022/01/20 23:19:39 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		error_occur(char **line, char ***data)
+int	error_occur(char **line, char ***data)
 {
 	free_tmp(line, data);
 	ft_putstr_fd("Wrong data or no data in the file\n", STDOUT_FILENO);

@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:18:02 by echerell          #+#    #+#             */
-/*   Updated: 2022/01/20 22:58:16 by echerell         ###   ########.fr       */
+/*   Updated: 2022/01/20 23:07:23 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	add_matrix(t_world *world, char **data)
 
 	i = 0;
 	start = world->cols * (world->lines - 1);
-	matrix = (t_point*)malloc(world->cols * world->lines * sizeof(t_point));
+	matrix = (t_point *)malloc(world->cols * world->lines * sizeof(t_point));
 	if (!matrix)
 		return (0);
 	if (world->mat)
@@ -107,6 +107,19 @@ static void	print_data(t_world *world)
 	}
 }
 */
+
+static void	free_error(t_world *world, int ret, char **line, char ***data)
+{
+	if (ret < 1)
+	{
+		free_tmp(line, data);
+		if (world->lines == 0)
+			ft_putstr_fd("Wrong data or no data in the file\n", STDOUT_FILENO);
+		if (ret == -1)
+			perror("Error");
+	}
+}
+
 int	check_map(int fd, t_world *world)
 {
 	char	*line;
@@ -115,7 +128,8 @@ int	check_map(int fd, t_world *world)
 
 	line = NULL;
 	data = NULL;
-	while ((ret = get_next_line(fd, &line)) > 0)
+	ret = get_next_line(fd, &line);
+	while (ret > 0)
 	{
 		world->lines++;
 		if (!split_line(&line, &data))
@@ -126,14 +140,8 @@ int	check_map(int fd, t_world *world)
 		if (!add_matrix(world, data))
 			return (error_occur(&line, &data));
 		free_tmp(&line, &data);
+		ret = get_next_line(fd, &line);
 	}
-	if (ret < 1)
-	{
-		free_tmp(&line, &data);
-		if (world->lines == 0)
-			ft_putstr_fd("Wrong data or no data in the file\n", STDOUT_FILENO);
-		if (ret == -1)
-			perror("Error");
-	}
+	free_error(world, ret, &line, &data);
 	return (ret);
 }

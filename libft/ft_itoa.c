@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 00:42:31 by echerell          #+#    #+#             */
-/*   Updated: 2021/05/05 16:22:58 by echerell         ###   ########.fr       */
+/*   Updated: 2022/01/20 23:38:19 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static	void	ft_make_str(char *str, long tmp, size_t i, int sign)
 	if (sign == -1)
 		str[i] = '-';
 	else
-		str[i] = tmp % 10 +'0';
+		str[i] = tmp % 10 + '0';
 }
 
 char	*ft_itoa(int n)

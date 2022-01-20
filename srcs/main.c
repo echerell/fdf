@@ -6,13 +6,13 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 17:58:52 by echerell          #+#    #+#             */
-/*   Updated: 2022/01/18 19:51:15 by echerell         ###   ########.fr       */
+/*   Updated: 2022/01/20 23:20:04 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int	fd;
 
@@ -20,7 +20,7 @@ int		main(int argc, char **argv)
 		ft_putstr_fd("Format: ./fdf map\n", STDOUT_FILENO);
 	else
 	{
-		fd = open((const char*)argv[1], O_RDONLY);
+		fd = open((const char *)argv[1], O_RDONLY);
 		if (fd == -1)
 			perror("Error");
 		else
