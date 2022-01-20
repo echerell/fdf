@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 00:13:38 by echerell          #+#    #+#             */
-/*   Updated: 2021/07/04 01:48:18 by echerell         ###   ########.fr       */
+/*   Updated: 2022/01/20 01:40:43 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	get_line(t_thread *thread, char **line, int i)
 			thread->strs = offset;
 			return (1);
 		}
-		ft_bzero(thread->strs, BUFFER_SIZE + 1);
+		mod_bzero(thread->strs, BUFFER_SIZE + 1);
 		if (!read(thread->fd, thread->strs, BUFFER_SIZE))
 			return (0);
 	}

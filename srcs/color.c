@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 21:54:38 by echerell          #+#    #+#             */
-/*   Updated: 2022/01/19 22:56:04 by echerell         ###   ########.fr       */
+/*   Updated: 2022/01/20 22:56:53 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	set_point_color(t_world *world, t_point *p)
 		grad.end.color = world->color;
 	else
 		grad.end.color = COLOR_WHITE;
-	p->color = make_gradient(grad, *p);
+	p->color = make_gradient(grad, *p, 'z');
 }
 
 void	add_color(t_world *world)
@@ -49,7 +49,7 @@ void	add_color(t_world *world)
 
 	world->color = set_world_color(world);
 	i = 0;
-	while(i < world->total)
+	while (i < world->total)
 	{
 		set_point_color(world, &(world->mat[i]));
 		i++;

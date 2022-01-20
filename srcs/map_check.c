@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:18:02 by echerell          #+#    #+#             */
-/*   Updated: 2022/01/19 18:24:31 by echerell         ###   ########.fr       */
+/*   Updated: 2022/01/20 22:58:16 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static int	split_line(char **line, char ***data)
 {
-	if (!(*data = ft_split(*line, ' ')))
+	*data = ft_split(*line, ' ');
+	if (!(*data))
 		return (0);
 	if (!((*data)[0]))
 		return (0);

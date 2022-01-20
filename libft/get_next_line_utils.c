@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 20:33:38 by echerell          #+#    #+#             */
-/*   Updated: 2021/07/04 01:22:59 by echerell         ###   ########.fr       */
+/*   Updated: 2022/01/20 01:40:05 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*mod_substr(char *s, unsigned int start, size_t len)
 	return (sub);
 }
 
-void	ft_bzero(void *ptr, size_t n)
+void	mod_bzero(void *ptr, size_t n)
 {
 	size_t	i;
 
