@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 00:00:06 by echerell          #+#    #+#             */
-/*   Updated: 2022/01/20 23:31:41 by echerell         ###   ########.fr       */
+/*   Updated: 2022/01/21 01:14:55 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	print_line_img_case2(t_mlx_data *data, t_point p1, t_point p2,
 	dy = p2.y_t - p1.y_t;
 	x_incr = -1;
 	if (p1.x_t <= p2.x_t)
-	x_incr = 1;
+		x_incr = 1;
 	e = (2 * dx) + dy;
 	while (p1.y_t <= p2.y_t)
 	{
